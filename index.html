@@ -494,9 +494,178 @@
     }
 
     /* General Section Padding */
-    section {
-      padding: 4.5rem 0;
-    }
+        section {
+          padding: 4.5rem 0;
+          position: relative;
+        }
+
+        /* ==========================================================================
+           Swiss Editorial Geometric & Architectural Visuals
+           ========================================================================== */
+        /* Target Reticle / Corner Crosshairs */
+        .crosshair-corner {
+          position: absolute;
+          width: 14px;
+          height: 14px;
+          pointer-events: none;
+          z-index: 5;
+        }
+
+        .crosshair-corner::before,
+        .crosshair-corner::after {
+          content: '';
+          position: absolute;
+          background: var(--text-muted);
+          opacity: 0.45;
+        }
+
+        .crosshair-corner::before {
+          top: 6px;
+          left: 0;
+          width: 100%;
+          height: 1px;
+        }
+
+        .crosshair-corner::after {
+          top: 0;
+          left: 6px;
+          width: 1px;
+          height: 100%;
+        }
+
+        .cross-top-left { top: 1.2rem; left: 1.5rem; }
+        .cross-top-right { top: 1.2rem; right: 1.5rem; }
+        .cross-bottom-left { bottom: 1.2rem; left: 1.5rem; }
+        .cross-bottom-right { bottom: 1.2rem; right: 1.5rem; }
+
+        /* Orbital Concentric Ring Motif (Hero Right Column) */
+        .concentric-rings-visual {
+          position: relative;
+          width: 130px;
+          height: 130px;
+          margin: 1.2rem auto 0.5rem auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .ring-outer {
+          position: absolute;
+          inset: 0;
+          border: 1px dashed var(--border-subtle);
+          border-radius: 50%;
+          animation: spin-slow 40s linear infinite;
+        }
+
+        .ring-mid {
+          position: absolute;
+          inset: 18px;
+          border: 1px solid var(--border-subtle);
+          border-radius: 50%;
+        }
+
+        .ring-inner {
+          position: absolute;
+          inset: 38px;
+          border: 1.5px solid var(--text-primary);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--surface-subtle);
+        }
+
+        .ring-pulse-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: var(--text-primary);
+          box-shadow: 0 0 0 4px rgba(18, 18, 18, 0.12);
+        }
+
+        .orbiting-pip {
+          position: absolute;
+          top: -3px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 6px;
+          height: 6px;
+          background: var(--text-primary);
+          border-radius: 50%;
+        }
+
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        /* Live Hardware Sparkline Object */
+        .metric-sparkline-box {
+          background: var(--surface-subtle);
+          border: 1px solid var(--border-subtle);
+          border-radius: var(--radius-sm);
+          padding: 0.65rem 0.85rem;
+          margin-top: 0.6rem;
+        }
+
+        .sparkline-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          color: var(--text-muted);
+          margin-bottom: 0.35rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .sparkline-svg {
+          width: 100%;
+          height: 28px;
+          overflow: visible;
+        }
+
+        .sparkline-path {
+          fill: none;
+          stroke: var(--text-primary);
+          stroke-width: 1.5;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+
+        .sparkline-area {
+          fill: rgba(18, 18, 18, 0.05);
+          stroke: none;
+        }
+
+        /* Dial Gauge Object for Architecture Cards */
+        .gauge-dial-visual {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          border: 1px solid var(--border-subtle);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          background: var(--surface-subtle);
+          margin-bottom: 1rem;
+        }
+
+        .gauge-dial-track {
+          position: absolute;
+          inset: 4px;
+          border: 2px dashed var(--border-subtle);
+          border-radius: 50%;
+        }
+
+        .gauge-dial-indicator {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: var(--text-primary);
+        }
 
     /* Projects Section Layout */
     .projects-section {
