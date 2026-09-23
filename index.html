@@ -2358,39 +2358,45 @@
     }
 
     // Avatar Upload & Supabase Integration
-    const avatarInput = document.getElementById('avatar-input');
-    const avatarImage = document.getElementById('avatar-image');
+        const avatarInput = document.getElementById('avatar-input');
+        const avatarImage = document.getElementById('avatar-image');
 
-    try {
-      const savedAvatar = localStorage.getItem('portfolio_custom_avatar');
-      if (savedAvatar && avatarImage) {
-        avatarImage.src = savedAvatar;
-      }
-    } catch (err) {}
+        function syncAllAvatars(src) {
+          document.querySelectorAll('#avatar-image, .portrait-img').forEach(img => {
+            img.src = src;
+          });
+        }
 
-    async function uploadAvatarToSupabase(file, filename) {
-      if (!supabaseClient) {
-        throw new Error('Supabase client not initialized');
-      }
-      const xhr = new XMLHttpRequest();
-      return new Promise((resolve, reject) => {
-        xhr.open('POST', `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${filename}`, true);
-        xhr.setRequestHeader('apikey', SUPABASE_ANON_KEY);
-        xhr.setRequestHeader('Authorization', `Bearer ${SUPABASE_ANON_KEY}`);
-        xhr.setRequestHeader('Content-Type', file.type || 'image/jpeg');
-
-        xhr.onload = () => {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            const { data } = supabaseClient.storage.from(BUCKET_NAME).getPublicUrl(filename);
-            resolve(data.publicUrl);
-          } else {
-            reject(new Error(xhr.responseText || 'Upload failed'));
+        try {
+          const savedAvatar = localStorage.getItem('portfolio_custom_avatar');
+          if (savedAvatar) {
+            syncAllAvatars(savedAvatar);
           }
-        };
-        xhr.onerror = () => reject(new Error('Network error uploading to Supabase'));
-        xhr.send(file);
-      });
-    }
+        } catch (err) {}
+
+        async function uploadAvatarToSupabase(file, filename) {
+          if (!supabaseClient) {
+            throw new Error('Supabase client not initialized');
+          }
+          const xhr = new XMLHttpRequest();
+          return new Promise((resolve, reject) => {
+            xhr.open('POST', `${SUPABASE_URL}/storage/v1/object/${BUCKET_NAME}/${filename}`, true);
+            xhr.setRequestHeader('apikey', SUPABASE_ANON_KEY);
+            xhr.setRequestHeader('Authorization', `Bearer ${SUPABASE_ANON_KEY}`);
+            xhr.setRequestHeader('Content-Type', file.type || 'image/jpeg');
+
+            xhr.onload = () => {
+              if (xhr.status >= 200 && xhr.status < 300) {
+                const { data } = supabaseClient.storage.from(BUCKET_NAME).getPublicUrl(filename);
+                resolve(data.publicUrl);
+              } else {
+                reject(new Error(xhr.responseText || 'Upload failed'));
+              }
+            };
+            xhr.onerror = () => reject(new Error('Network error uploading to Supabase'));
+            xhr.send(file);
+          });
+        }
 
     // Canvas Cropper Implementation
     const cropperModal = document.getElementById('cropper-modal');
@@ -2514,32 +2520,32 @@
         );
 
         canvas.toBlob(async (blob) => {
-          if (!blob) return;
+                  if (!blob) return;
 
-          const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.95);
-          avatarImage.src = croppedDataUrl;
-          showToast('Uploading portrait to cloud...');
+                  const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.95);
+                  syncAllAvatars(croppedDataUrl);
+                  showToast('Uploading portrait to cloud...');
 
-          const uniqueName = `portfolio_avatar_${Date.now()}.jpg`;
-          const croppedFile = new File([blob], uniqueName, { type: 'image/jpeg' });
+                  const uniqueName = `portfolio_avatar_${Date.now()}.jpg`;
+                  const croppedFile = new File([blob], uniqueName, { type: 'image/jpeg' });
 
-          try {
-            const cloudUrl = await uploadAvatarToSupabase(croppedFile, uniqueName);
-            avatarImage.src = cloudUrl;
-            try {
-              localStorage.setItem('portfolio_custom_avatar', cloudUrl);
-            } catch (storageErr) {}
-            showToast('Portrait updated & synced to cloud!');
-          } catch (cloudErr) {
-            console.warn('Cloud sync error, caching locally:', cloudErr);
-            try {
-              localStorage.setItem('portfolio_custom_avatar', croppedDataUrl);
-            } catch (storageErr) {}
-            showToast('Portrait stored locally!');
-          }
+                  try {
+                    const cloudUrl = await uploadAvatarToSupabase(croppedFile, uniqueName);
+                    syncAllAvatars(cloudUrl);
+                    try {
+                      localStorage.setItem('portfolio_custom_avatar', cloudUrl);
+                    } catch (storageErr) {}
+                    showToast('Portrait updated & synced to cloud!');
+                  } catch (cloudErr) {
+                    console.warn('Cloud sync error, caching locally:', cloudErr);
+                    try {
+                      localStorage.setItem('portfolio_custom_avatar', croppedDataUrl);
+                    } catch (storageErr) {}
+                    showToast('Portrait stored locally!');
+                  }
 
-          if (avatarInput) avatarInput.value = '';
-        }, 'image/jpeg', 0.95);
+                  if (avatarInput) avatarInput.value = '';
+                }, 'image/jpeg', 0.95);
       });
     }
 
