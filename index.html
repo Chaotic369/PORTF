@@ -1539,34 +1539,58 @@
                         </div>
 
                         <!-- Right Stat & Status Matrix (Inspired by Reference 1 & 2) -->
-                        <div class="hero-stat-col">
-                          <div>
-                            <div class="hero-huge-num">04</div>
-                            <div class="stat-status-row">
-                              <span class="stat-status-dot"></span>
-                              Active Focus
-                            </div>
-                          </div>
+                                    <div class="hero-stat-col" style="position: relative;">
+                                      <div class="crosshair-corner cross-top-right"></div>
+                                      <div>
+                                        <div class="hero-huge-num">04</div>
+                                        <div class="stat-status-row">
+                                          <span class="stat-status-dot"></span>
+                                          Active Focus
+                                        </div>
+                                      </div>
 
-                          <div class="stat-list">
-                            <div class="stat-list-item">
-                              <div class="stat-list-val" id="metric-repos">0+</div>
-                              <div class="stat-list-lbl">Repositories Tracked</div>
-                            </div>
-                            <div class="stat-list-item">
-                              <div class="stat-list-val" id="metric-stars">0</div>
-                              <div class="stat-list-lbl">GitHub Stars Earned</div>
-                            </div>
-                            <div class="stat-list-item">
-                              <div class="stat-list-val">99.9%</div>
-                              <div class="stat-list-lbl">Algorithmic Precision</div>
-                            </div>
-                            <div class="stat-list-item">
-                              <div class="stat-list-val">< 15ms</div>
-                              <div class="stat-list-lbl">Engine Target Latency</div>
-                            </div>
-                          </div>
-                        </div>
+                                      <!-- Concentric Radar / Rings Visual Object -->
+                                      <div class="concentric-rings-visual" title="Deterministic Ring Buffer Execution Status">
+                                        <div class="ring-outer">
+                                          <span class="orbiting-pip"></span>
+                                        </div>
+                                        <div class="ring-mid"></div>
+                                        <div class="ring-inner">
+                                          <div class="ring-pulse-dot"></div>
+                                        </div>
+                                      </div>
+
+                                      <div class="stat-list">
+                                        <div class="stat-list-item">
+                                          <div class="stat-list-val" id="metric-repos">0+</div>
+                                          <div class="stat-list-lbl">Repositories Tracked</div>
+                                        </div>
+                                        <div class="stat-list-item">
+                                          <div class="stat-list-val" id="metric-stars">0</div>
+                                          <div class="stat-list-lbl">GitHub Stars Earned</div>
+                                        </div>
+                                        <div class="stat-list-item">
+                                          <div class="stat-list-val">99.9%</div>
+                                          <div class="stat-list-lbl">Algorithmic Precision</div>
+                                        </div>
+                                        <div class="stat-list-item">
+                                          <div class="stat-list-val">< 15ms</div>
+                                          <div class="stat-list-lbl">Engine Target Latency</div>
+                                        </div>
+
+                                        <!-- Real-Time Hardware Latency Sparkline Object -->
+                                        <div class="metric-sparkline-box">
+                                          <div class="sparkline-meta">
+                                            <span>Tick Flow</span>
+                                            <span>14.2ms</span>
+                                          </div>
+                                          <svg class="sparkline-svg" viewBox="0 0 160 30" preserveAspectRatio="none">
+                                            <polygon class="sparkline-area" points="0,25 20,20 40,24 60,12 80,18 100,8 120,16 140,10 160,14 160,30 0,30" />
+                                            <polyline class="sparkline-path" points="0,25 20,20 40,24 60,12 80,18 100,8 120,16 140,10 160,14" />
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
                       </div>
                     </div>
                   </section>
