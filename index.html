@@ -1831,22 +1831,34 @@
                       </p>
 
                       <div class="principles-grid">
-                        <div class="principle-card">
-                          <i class="fa-solid fa-gauge-simple" style="font-size: 1.4rem; color: var(--text-primary);"></i>
-                          <h3>Deterministic Execution</h3>
-                          <p>Preferring zero-allocation hot paths, cache-friendly array layouts, and minimal heap pressure during real-time tick streaming and order routing.</p>
-                        </div>
-                        <div class="principle-card">
-                          <i class="fa-solid fa-shield-halved" style="font-size: 1.4rem; color: var(--text-primary);"></i>
-                          <h3>Fault Isolation & RAII</h3>
-                          <p>Encapsulating native OS handles and network sockets within strict RAII boundaries to guarantee zero resource leaks across long-running desktop processes.</p>
-                        </div>
-                        <div class="principle-card">
-                          <i class="fa-solid fa-network-wired" style="font-size: 1.4rem; color: var(--text-primary);"></i>
-                          <h3>Decoupled Pipelines</h3>
-                          <p>Separating market ingestion, mathematical indicator calculations, and UI presentation buffers to avoid main-thread latency spikes.</p>
-                        </div>
-                      </div>
+                                  <div class="principle-card" style="position: relative;">
+                                    <div class="crosshair-corner cross-top-right"></div>
+                                    <div class="gauge-dial-visual">
+                                      <div class="gauge-dial-track"></div>
+                                      <div class="gauge-dial-indicator"></div>
+                                    </div>
+                                    <h3>Deterministic Execution</h3>
+                                    <p>Preferring zero-allocation hot paths, cache-friendly array layouts, and minimal heap pressure during real-time tick streaming and order routing.</p>
+                                  </div>
+                                  <div class="principle-card" style="position: relative;">
+                                    <div class="crosshair-corner cross-top-right"></div>
+                                    <div class="gauge-dial-visual">
+                                      <div class="gauge-dial-track" style="border-style: solid; opacity: 0.5;"></div>
+                                      <div class="gauge-dial-indicator" style="background: transparent; border: 2px solid var(--text-primary);"></div>
+                                    </div>
+                                    <h3>Fault Isolation & RAII</h3>
+                                    <p>Encapsulating native OS handles and network sockets within strict RAII boundaries to guarantee zero resource leaks across long-running desktop processes.</p>
+                                  </div>
+                                  <div class="principle-card" style="position: relative;">
+                                    <div class="crosshair-corner cross-top-right"></div>
+                                    <div class="gauge-dial-visual">
+                                      <div class="gauge-dial-track"></div>
+                                      <span style="font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700;">I/O</span>
+                                    </div>
+                                    <h3>Decoupled Pipelines</h3>
+                                    <p>Separating market ingestion, mathematical indicator calculations, and UI presentation buffers to avoid main-thread latency spikes.</p>
+                                  </div>
+                                </div>
                     </div>
                   </section>
 
